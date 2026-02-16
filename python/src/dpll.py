@@ -1,3 +1,5 @@
+import random
+
 class DPLL:
     def __init__(self, clauses, symbols):
         self.clauses = clauses
@@ -26,27 +28,27 @@ class DPLL:
             return self.dpll(clauses, symbols, model)
         
         # pure literal elimination
-        # vars, vals = pure_symbol(clauses, model) 
-        # if vars: 
-        #     symbols = list(set(symbols) - set(vars))
-        #     model = model | dict(zip(vars, vals))
-        #     return dpll(clauses, symbols, model)
+        vars, vals = self.pure_symbol(clauses, model) 
+        if vars: 
+            symbols = list(set(symbols) - set(vars))
+            model = model | dict(zip(vars, vals))
+            return self.dpll(clauses, symbols, model)
         
         # branch
         if not symbols:
             return None
 
-        p = self.choose_branching_var(symbols, clauses, model)
+        p, sign = self.branch_var_random(symbols, clauses, model)
         if p is None:
             return None
 
         rest = [s for s in symbols if s != p]
 
-        res = self.dpll(clauses, rest, (model | {p: True}))
+        res = self.dpll(clauses, rest, (model | {p: sign}))
         if res is not None:
             return res
         
-        return self.dpll(clauses, rest, (model | {p: False})) # backtracking with False
+        return self.dpll(clauses, rest, (model | {p: not sign})) # backtracking with False
 
     def eval_clause(self, clause, model):
         """Evaluates a clause given a model"""
@@ -150,3 +152,59 @@ class DPLL:
         if not var_score:
             return None
         return max(var_score, key=var_score.get)
+    
+    def branch_var(self, symbols, clauses, model):
+        var_score = {var: 0 for var in symbols}
+        pos_score = {var: 0 for var in symbols}
+        neg_score = {var: 0 for var in symbols}
+
+        for clause in clauses:
+            if self.eval_clause(clause, model) != 'TRUE':
+                for lit in clause:
+                    var = abs(lit)
+                    if var in symbols:
+                        var_score[var] += 1
+
+                        if lit > 0: 
+                            pos_score[var] += 1
+                        else: 
+                            neg_score[var] += 1
+
+        if not var_score:
+            return None
+        
+        best_var = max(var_score, key=var_score.get)
+        if (pos_score[best_var] > neg_score[best_var]): 
+            return best_var, True 
+        else: 
+            return best_var, False
+        
+    def branch_var_random(self, symbols, clauses, model):
+        var_score = {var: 0 for var in symbols}
+        pos_score = {var: 0 for var in symbols}
+        neg_score = {var: 0 for var in symbols}
+
+        for clause in clauses:
+            if self.eval_clause(clause, model) != 'TRUE':
+                for lit in clause:
+                    var = abs(lit)
+                    if var in symbols:
+                        var_score[var] += 1
+
+                        if lit > 0: 
+                            pos_score[var] += 1
+                        else: 
+                            neg_score[var] += 1
+
+        non_zero = [v for v in symbols if var_score[v] > 0]
+        if not non_zero:
+            return None
+        
+        sorted_var = sorted(non_zero, key=lambda v: var_score[v], reverse=True)
+        top_v = sorted_var[:4] 
+        best_var = random.choice(top_v)
+        
+        if (pos_score[best_var] > neg_score[best_var]): 
+            return best_var, True 
+        else: 
+            return best_var, False
