@@ -1,0 +1,215 @@
+notes/thoughts
+
+main updates: 
+1. tried using bohm's algorithm, which tries to satisfy smaller clauses first. results can be found in bohm_sample and bohm_combined (where i switched between bohm's and the other variable counting heuristic because bohm's is so expensive). results were not great, but it did solve some that the variable one couldn't. i think we could figure out a way to strike a balance, which is what i tried to do with the combined version, but it didn't work that well. i also implemented bohm's with polarity choosing as well (at first I didn't use this) but I don't think it helped all that much 
+
+2. i think it could be worthwhile to try to port the code to C, since the main constraint is time at this point 
+
+3. i was thinking we should have something in the code that basically says if time is running out to just choose either unsat/sat. i think most of the ones that are unsolved rn are unsat, so we could just always pick unsat, but this way we can at least have some output. idk if that's technically allowed lol but our reasoning can be that if it doesn't finish in 5 mins, it's too complicated to be sat
+
+-- haven't completed yet -- 
+
+===== C1065_064.cnf =====
+Total clauses: 1065
+Unique variables: 50
+
+1065 clauses of size 5
+
+===== C1597_060.cnf =====
+Total clauses: 1597
+Unique variables: 75
+
+1597 clauses of size 5
+
+===== U50_1065_045.cnf =====
+Total clauses: 1065
+Unique variables: 50
+
+1065 clauses of size 5
+
+===== C243_188.cnf =====
+Total clauses: 1884008
+Unique variables: 24356
+
+1655732 clauses of size 2 | 177720 clauses of size 3 | 24200 clauses of size 4
+25920 clauses of size 5 | 52 clauses of size 7 | 96 clauses of size 48
+288 clauses of size 144
+
+===== C175_145.cnf =====
+Total clauses: 14577
+Unique variables: 175
+
+140 clauses of size 2 | 4 clauses of size 7 | 1771 clauses of size 8
+9790 clauses of size 9 | 2872 clauses of size 10
+
+===== U50_4450_035.cnf =====
+Total clauses: 4450
+Unique variables: 50
+
+4450 clauses of size 7
+
+===== C289_179.cnf =====
+Total clauses: 179895
+Unique variables: 28902
+
+41362 clauses of size 2 | 84684 clauses of size 3 | 53848 clauses of size 5
+1 clauses of size 490
+
+===== C200_1806.cnf =====
+Total clauses: 1806
+Unique variables: 200
+
+6 clauses of size 1 | 1800 clauses of size 4
+
+===== C53_895.cnf =====
+Total clauses: 89506
+Unique variables: 5356
+
+1 clauses of size 1 | 70293 clauses of size 2 | 15301 clauses of size 3
+173 clauses of size 4 | 114 clauses of size 5 | 356 clauses of size 6
+159 clauses of size 7 | 108 clauses of size 8 | 174 clauses of size 9
+129 clauses of size 10 | 140 clauses of size 11 | 108 clauses of size 12
+131 clauses of size 13 | 110 clauses of size 14 | 136 clauses of size 15
+89 clauses of size 16 | 106 clauses of size 17 | 91 clauses of size 18
+83 clauses of size 19 | 73 clauses of size 20 | 78 clauses of size 21
+127 clauses of size 22 | 88 clauses of size 23 | 75 clauses of size 24
+88 clauses of size 25 | 74 clauses of size 26 | 77 clauses of size 27
+70 clauses of size 28 | 78 clauses of size 29 | 213 clauses of size 30
+80 clauses of size 31 | 95 clauses of size 32 | 81 clauses of size 33
+100 clauses of size 34 | 68 clauses of size 35 | 56 clauses of size 36
+47 clauses of size 37 | 40 clauses of size 38 | 22 clauses of size 39
+22 clauses of size 40 | 4 clauses of size 41 | 4 clauses of size 42
+4 clauses of size 43 | 4 clauses of size 44 | 2 clauses of size 45
+2 clauses of size 49 | 2 clauses of size 50 | 2 clauses of size 51
+2 clauses of size 52 | 2 clauses of size 56 | 2 clauses of size 58
+2 clauses of size 59 | 2 clauses of size 61 | 2 clauses of size 63
+2 clauses of size 64 | 2 clauses of size 65 | 4 clauses of size 66
+2 clauses of size 67 | 6 clauses of size 68
+
+-- UNSAT -- 
+===== C210_55.cnf =====
+Total clauses: 5781
+Unique variables: 1608
+
+1145 clauses of size 1 | 3393 clauses of size 2 | 399 clauses of size 3
+125 clauses of size 4 | 155 clauses of size 5 | 74 clauses of size 6
+25 clauses of size 7 | 27 clauses of size 8 | 85 clauses of size 9
+136 clauses of size 10 | 110 clauses of size 11 | 66 clauses of size 12
+34 clauses of size 13 | 1 clauses of size 18 | 1 clauses of size 19
+1 clauses of size 23 | 1 clauses of size 24 | 1 clauses of size 27
+1 clauses of size 28 | 1 clauses of size 44
+
+===== C208_120.cnf =====
+Total clauses: 5278
+Unique variables: 1516
+
+1164 clauses of size 1 | 3447 clauses of size 2 | 362 clauses of size 3
+161 clauses of size 4 | 100 clauses of size 5 | 18 clauses of size 6
+5 clauses of size 7 | 1 clauses of size 8 | 5 clauses of size 9
+6 clauses of size 10 | 1 clauses of size 11 | 3 clauses of size 13
+1 clauses of size 15 | 1 clauses of size 19 | 1 clauses of size 30
+1 clauses of size 34 | 1 clauses of size 43
+
+===== U50_1065_038.cnf =====
+Total clauses: 1065
+Unique variables: 50
+
+1065 clauses of size 5
+
+===== C168_128.cnf =====
+Total clauses: 5425
+Unique variables: 1583
+
+1148 clauses of size 1 | 2978 clauses of size 2 | 393 clauses of size 3
+137 clauses of size 4 | 172 clauses of size 5 | 113 clauses of size 6
+122 clauses of size 7 | 136 clauses of size 8 | 60 clauses of size 9
+62 clauses of size 10 | 36 clauses of size 11 | 47 clauses of size 12
+6 clauses of size 13 | 10 clauses of size 14 | 1 clauses of size 16
+1 clauses of size 18 | 1 clauses of size 19 | 1 clauses of size 44
+1 clauses of size 100
+
+===== C1065_082.cnf =====
+Total clauses: 1065
+Unique variables: 50
+
+1065 clauses of size 5
+
+===== C210_30.cnf =====
+Total clauses: 7426
+Unique variables: 1629
+
+1118 clauses of size 1 | 3809 clauses of size 2 | 511 clauses of size 3
+319 clauses of size 4 | 444 clauses of size 5 | 209 clauses of size 6
+183 clauses of size 7 | 101 clauses of size 8 | 22 clauses of size 9
+143 clauses of size 10 | 190 clauses of size 11 | 106 clauses of size 12
+88 clauses of size 13 | 16 clauses of size 14 | 64 clauses of size 15
+80 clauses of size 16 | 16 clauses of size 17 | 1 clauses of size 18
+1 clauses of size 19 | 1 clauses of size 23 | 1 clauses of size 24
+1 clauses of size 27 | 1 clauses of size 28 | 1 clauses of size 44
+
+===== C208_3254.cnf =====
+Total clauses: 7334
+Unique variables: 1805
+
+1166 clauses of size 1 | 4315 clauses of size 2 | 718 clauses of size 3
+274 clauses of size 4 | 181 clauses of size 5 | 32 clauses of size 6
+10 clauses of size 7 | 351 clauses of size 8 | 14 clauses of size 9
+11 clauses of size 10 | 37 clauses of size 11 | 10 clauses of size 12
+14 clauses of size 13 | 3 clauses of size 14 | 12 clauses of size 15
+12 clauses of size 16 | 13 clauses of size 17 | 12 clauses of size 18
+2 clauses of size 19 | 2 clauses of size 21 | 48 clauses of size 22
+8 clauses of size 25 | 3 clauses of size 26 | 1 clauses of size 27
+3 clauses of size 29 | 1 clauses of size 30 | 7 clauses of size 32
+1 clauses of size 34 | 6 clauses of size 35 | 21 clauses of size 40
+2 clauses of size 41 | 1 clauses of size 42 | 1 clauses of size 43
+13 clauses of size 180 | 16 clauses of size 182 | 13 clauses of size 183
+
+-- SAT -- 
+===== U75_1597_024.cnf =====
+Total clauses: 1597
+Unique variables: 75
+
+1597 clauses of size 5
+
+===== C181_3151.cnf =====
+Total clauses: 3151
+Unique variables: 181
+
+2322 clauses of size 2 | 810 clauses of size 3 | 9 clauses of size 9
+10 clauses of size 10
+
+===== C459_4675.cnf =====
+Total clauses: 4675
+Unique variables: 459
+
+3303 clauses of size 2 | 1355 clauses of size 3 | 2 clauses of size 4
+1 clauses of size 6 | 3 clauses of size 7 | 1 clauses of size 8
+5 clauses of size 9 | 5 clauses of size 10
+
+===== C1597_081.cnf =====
+Total clauses: 1597
+Unique variables: 75
+
+1597 clauses of size 5
+
+===== C1597_024.cnf =====
+Total clauses: 1597
+Unique variables: 75
+
+1597 clauses of size 5
+
+===== C140.cnf =====
+Total clauses: 6306
+Unique variables: 1701
+
+1146 clauses of size 1 | 3607 clauses of size 2 | 477 clauses of size 3
+239 clauses of size 4 | 127 clauses of size 5 | 92 clauses of size 6
+51 clauses of size 7 | 315 clauses of size 8 | 35 clauses of size 9
+17 clauses of size 10 | 38 clauses of size 11 | 11 clauses of size 12
+24 clauses of size 13 | 12 clauses of size 14 | 1 clauses of size 18
+3 clauses of size 19 | 1 clauses of size 20 | 13 clauses of size 21
+5 clauses of size 22 | 11 clauses of size 23 | 9 clauses of size 27
+3 clauses of size 28 | 4 clauses of size 29 | 10 clauses of size 30
+5 clauses of size 32 | 1 clauses of size 33 | 12 clauses of size 34
+2 clauses of size 35 | 14 clauses of size 36 | 3 clauses of size 37
+18 clauses of size 38

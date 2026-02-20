@@ -53,7 +53,7 @@ def main(args):
         
         # create string of "var value" pairs for assigned variables only
         solution_str = ' '.join(
-            f"{var} {True if val == TRUE else False}"  # 1 = True, 0 = False
+            f"{var} {'true' if val == TRUE else 'false'}"  # 1 = True, 0 = False
             for var, val in enumerate(result) 
             if var > 0 and val != UNASSIGNED
         )
